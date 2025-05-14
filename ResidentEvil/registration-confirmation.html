@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Confirmation</title>
+  <link rel="stylesheet" href="confirmation-style.css">
+  <style>
+    .loader {
+      display: none;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid black;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .processing {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-container">
+    <h2>Registration Confirmation</h2>
+    <form id="confirmationForm">
+      <label for="verification">Verification Code</label>
+      <input type="text" id="verification" placeholder="Enter your verification code sent to your email" required>
+      <button type="submit" id="submitBtn">Enter Code</button>
+      <div class="loader" id="loader"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("confirmationForm");
+    const loader = document.getElementById("loader");
+    const button = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const code = document.getElementById("verification").value.trim();
+
+      // Show loader and disable button
+      loader.style.display = "block";
+      button.disabled = true;
+      button.classList.add("processing");
+
+      // Simulate delay for processing (e.g., API check)
+      setTimeout(() => {
+        if (code === "123456") {
+          window.location.href = "registration-success.html";
+        } else {
+          alert("Invalid verification code. Please try again.");
+          loader.style.display = "none";
+          button.disabled = false;
+          button.classList.remove("processing");
+        }
+      }, 2000); // 2 second fake delay
+    });
+  </script>
+</body>
+</html>

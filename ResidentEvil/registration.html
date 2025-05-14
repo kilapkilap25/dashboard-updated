@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+  <link rel="stylesheet" href="registration-style.css">
+  <style>
+    .loader {
+      display: none;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid black;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .processing {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registration</h2>
+    <form id="registrationForm">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" placeholder="Enter your first name" required>
+
+      <label for="middleName">Middle Name</label>
+      <input id="middleName" type="text" placeholder="Enter your middle name">
+
+      <label for="surname">Surname</label>
+      <input id="surname" type="text" placeholder="Enter your surname" required>
+
+      <label for="fullAddress">Full Address</label>
+      <input id="fullAddress" type="text" placeholder="Enter your full address" required>
+
+      <label for="region">Region</label>
+      <select id="region" required>
+        <option value="">-- Select Region --</option>
+        <option value="NCR">NCR</option>
+        <option value="Region IV-A">Region IV-A</option>
+      </select>
+
+      <label for="city">City</label>
+      <select id="city" required>
+        <option value="">-- Select City --</option>
+      </select>
+
+      <label for="barangay">Barangay</label>
+      <select id="barangay" required>
+        <option value="">-- Select Barangay --</option>
+      </select>
+
+      <label for="birthdate">Birthdate</label>
+      <input id="birthdate" type="date" required>
+
+      <label for="email">Email Address</label>
+      <input id="email" type="email" placeholder="Enter your email address" required>
+
+      <label for="idPresented">ID Presented</label>
+      <input id="idPresented" type="file" accept="image/*" required>
+
+      <label for="selfie">Take a Selfie shot</label>
+      <input id="selfie" type="file" accept="image/*" capture="user" required>
+
+      <button type="submit" id="registerBtn">Register</button>
+      <div class="loader" id="loader"></div>
+    </form>
+    <p class="login-link">Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    const locationData = {
+      "NCR": {
+        "Quezon City": ["Barangay A", "Barangay B", "Barangay C"],
+        "Manila": ["Barangay D", "Barangay E", "Barangay F"]
+      },
+      "Region IV-A": {
+        "Cavite": ["Barangay G", "Barangay H"],
+        "Laguna": ["Barangay I", "Barangay J"]
+      }
+    };
+
+    const regionSelect = document.getElementById('region');
+    const citySelect = document.getElementById('city');
+    const barangaySelect = document.getElementById('barangay');
+
+    regionSelect.addEventListener('change', function () {
+      const region = this.value;
+      citySelect.innerHTML = '<option value="">-- Select City --</option>';
+      barangaySelect.innerHTML = '<option value="">-- Select Barangay --</option>';
+
+      if (locationData[region]) {
+        Object.keys(locationData[region]).forEach(city => {
+          const option = document.createElement('option');
+          option.value = city;
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+    });
+
+    citySelect.addEventListener('change', function () {
+      const region = regionSelect.value;
+      const city = this.value;
+      barangaySelect.innerHTML = '<option value="">-- Select Barangay --</option>';
+
+      if (locationData[region] && locationData[region][city]) {
+        locationData[region][city].forEach(brgy => {
+          const option = document.createElement('option');
+          option.value = brgy;
+          option.textContent = brgy;
+          barangaySelect.appendChild(option);
+        });
+      }
+    });
+
+    const form = document.getElementById("registrationForm");
+    const button = document.getElementById("registerBtn");
+    const loader = document.getElementById("loader");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Disable button and show loader
+      button.disabled = true;
+      button.classList.add("processing");
+      loader.style.display = "block";
+
+      // Simulate registration delay (e.g., sending to backend)
+      setTimeout(() => {
+        // After successful registration simulation, redirect to confirmation
+        window.location.href = "registration-confirmation.html";
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
