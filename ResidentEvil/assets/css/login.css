@@ -12,7 +12,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f6f8;
+    background: var(--light-bg);
+    color: var(--text);
 }
 
 /* Login Container */
@@ -21,9 +22,9 @@ body {
     width: 80%;
     max-width: 1200px;
     height: 80%;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(52, 152, 219, 0.07);
     overflow: hidden;
 }
 
@@ -90,10 +91,16 @@ body {
     width: 100%;
     padding: 1rem;
     padding-right: 3rem;
-    border: 1px solid #ddd;
+    border: 2px solid var(--border);
     border-radius: 5px;
     font-size: 1rem;
-    color: #333;
+    background: var(--white);
+    color: var(--text);
+}
+
+.input-container input:focus {
+    border-color: var(--primary);
+    outline: none;
 }
 
 .input-container span {
@@ -124,14 +131,14 @@ body {
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    transition: background 0.2s, box-shadow 0.2s;
 }
 
-.submit:hover {
-    background-color: #0056b3;
+button:hover, .submit:hover {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
 }
 
 .forgot-password {
@@ -164,4 +171,18 @@ body {
 
 .signup-link a:hover {
     text-decoration: underline;
+}
+
+/* Root Variables */
+:root {
+  --primary: #3498db;
+  --accent: #5a34ea;
+  --secondary: #36c1e1;
+  --dark: #22223b;
+  --light-bg: #f6f8fa;
+  --white: #fff;
+  --text: #22223b;
+  --muted: #6c757d;
+  --border: #e0e0e0;
+  --button-hover: #333;
 }

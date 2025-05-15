@@ -18,27 +18,7 @@ function showProfile() {
 
         
         function goBack() {
-            // Add functionality to service options within modal
-            modalBody.addEventListener('click', (e) => {
-            if (e.target.classList.contains('service-option')) {
-                alert(`You selected: ${e.target.textContent}`);
-                // Here you can add further functionality when an option is selected
-            }
-            });
-
-            // Add functionality to the back button
-            document.getElementById('backButton').addEventListener('click', () => {
-            // Hide the modal
-            modal.style.display = "none";
-            
-            // Remove active class from all service divs
-            document.querySelectorAll('.service').forEach(s => {
-                s.classList.remove('active');
-            });
-            
-            // Optionally, you can reset the modal content if needed
-            modalBody.innerHTML = '';
-            });
+            window.location.href = "dashboard.html";
         }
         
         function logout() {

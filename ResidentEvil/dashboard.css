@@ -379,3 +379,16 @@ section.grid-container {
 .profilePic:hover {
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
+
+:root {
+  --primary: #3498db;
+  --accent: #5a34ea;
+  --secondary: #36c1e1;
+  --dark: #22223b;
+  --light-bg: #f6f8fa;
+  --white: #fff;
+  --text: #22223b;
+  --muted: #6c757d;
+  --border: #e0e0e0;
+  --button-hover: #333;
+}
